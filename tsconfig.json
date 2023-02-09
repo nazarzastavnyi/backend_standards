@@ -1,0 +1,23 @@
+{
+    "ts-node": {
+        "files": true
+      },
+      "files": [
+        "src/index.ts",
+        "src/lib/index.d.ts"
+      ],
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "dist",
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "baseUrl": "."
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "typeRoots": ["./src/lib", "./node_modules/@types"]
+}

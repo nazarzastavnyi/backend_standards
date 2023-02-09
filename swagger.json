@@ -1,0 +1,108 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Standard Backend",
+        "description": "Standard Backend API",
+        "license": {
+            "name": "",
+            "url": ""
+        }
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT token"
+        }
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "User authorization",
+                "parameters": [
+                    {
+                        "type": "object",
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "required": [
+                                "login",
+                                "password"
+                            ],
+                            "properties": {
+                                "login": {
+                                    "type": "string",
+                                    "example": "test@mail.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "test"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/registration": {
+            "get": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "User registration data",
+                "parameters": [
+                    {
+                        "name": "registrationId",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "decription": "Registration Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example": "John Smith"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "example": "john.smith@example.com"
+                                },
+                                "customerName": {
+                                    "type": "string",
+                                    "example": "Microsoft"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
