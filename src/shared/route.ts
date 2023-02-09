@@ -8,7 +8,7 @@ export namespace appRoute {
             },
             device: {
                 device: '/device/',
-                list: '/getDeviceList',
+                list: '/deviceList',
                 update: '/device/update',
                 deviceById: '/device/:id'
             }

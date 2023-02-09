@@ -46,38 +46,17 @@
                                 "password"
                             ],
                             "properties": {
-                                "login": {
+                                "email": {
                                     "type": "string",
-                                    "example": "test@mail.com"
+                                    "required": true
                                 },
                                 "password": {
                                     "type": "string",
-                                    "example": "test"
+                                    "example": "test",
+                                    "required": true
                                 }
                             }
                         }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/auth/registration": {
-            "get": {
-                "tags": [
-                    "Authorization"
-                ],
-                "summary": "User registration data",
-                "parameters": [
-                    {
-                        "name": "registrationId",
-                        "in": "query",
-                        "required": true,
-                        "type": "string",
-                        "decription": "Registration Id"
                     }
                 ],
                 "responses": {
@@ -86,18 +65,331 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "name": {
+                                "token": {
                                     "type": "string",
-                                    "example": "John Smith"
+                                    "example": "test-token"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/singup": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Rider registration",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "rider": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "test",
+                                    "required": true
                                 },
                                 "email": {
                                     "type": "string",
-                                    "example": "john.smith@example.com"
-                                },
-                                "customerName": {
-                                    "type": "string",
-                                    "example": "Microsoft"
+                                    "required": true
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Rider logout",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deviceList": {
+            "get": {
+                "tags": [
+                    "Device"
+                ],
+                "summary": "Device list",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "platform": "web",
+                                    "device_id": "test",
+                                    "fcm_token": "",
+                                    "ya_device_id": "test",
+                                    "brand": "",
+                                    "model": "",
+                                    "os_version": "",
+                                    "app_version": "",
+                                    "device_lang": "",
+                                    "app_lang": "",
+                                    "active": true,
+                                    "_id": "63e4d776baa299d1ffde6ac1",
+                                    "created_at": "2023-02-09T11:22:30.819Z",
+                                    "last_used": "2023-02-09T11:22:30.819Z",
+                                    "__v": 0
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/device/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Device"
+                ],
+                "summary": "Get Device",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "platform": "web",
+                                "device_id": "test",
+                                "fcm_token": "",
+                                "ya_device_id": "test",
+                                "brand": "",
+                                "model": "",
+                                "os_version": "",
+                                "app_version": "",
+                                "device_lang": "",
+                                "app_lang": "",
+                                "active": true,
+                                "_id": "63e4d776baa299d1ffde6ac1",
+                                "created_at": "2023-02-09T11:22:30.819Z",
+                                "last_used": "2023-02-09T11:22:30.819Z",
+                                "__v": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Device"
+                ],
+                "summary": "Delete Device",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "success": {
+                                    "acknowledged": true,
+                                    "deletedCount": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/device": {
+            "post": {
+                "tags": [
+                    "Device"
+                ],
+                "summary": "Create Device",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "type": "object",
+                        "in": "body",
+                        "properties": {
+                            "platform": {
+                                "type": "string"
+                            },
+                            "device_id": {
+                                "type": "string",
+                                "required": true
+                            },
+                            "fcm_token": {
+                                "type": "string"
+                            },
+                            "ya_device_id": {
+                                "type": "string"
+                            },
+                            "brand": {
+                                "type": "string"
+                            },
+                            "model": {
+                                "type": "string"
+                            },
+                            "os_version": {
+                                "type": "string"
+                            },
+                            "app_version": {
+                                "type": "string"
+                            },
+                            "device_lang": {
+                                "type": "string"
+                            },
+                            "app_lang": {
+                                "type": "string"
+                            },
+                            "active": {
+                                "type": "boolean"
+                            },
+                            "location": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "platform": "web",
+                                "device_id": "test",
+                                "fcm_token": "",
+                                "ya_device_id": "test",
+                                "brand": "",
+                                "model": "",
+                                "os_version": "",
+                                "app_version": "",
+                                "device_lang": "",
+                                "app_lang": "",
+                                "active": true,
+                                "_id": "63e4d776baa299d1ffde6ac1",
+                                "created_at": "2023-02-09T11:22:30.819Z",
+                                "last_used": "2023-02-09T11:22:30.819Z",
+                                "__v": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Device"
+                ],
+                "summary": "Put Device",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "type": "object",
+                        "in": "body",
+                        "properties": {
+                            "platform": {
+                                "type": "string"
+                            },
+                            "device_id": {
+                                "type": "string",
+                                "required": true
+                            },
+                            "fcm_token": {
+                                "type": "string"
+                            },
+                            "ya_device_id": {
+                                "type": "string"
+                            },
+                            "brand": {
+                                "type": "string"
+                            },
+                            "model": {
+                                "type": "string"
+                            },
+                            "os_version": {
+                                "type": "string"
+                            },
+                            "app_version": {
+                                "type": "string"
+                            },
+                            "device_lang": {
+                                "type": "string"
+                            },
+                            "app_lang": {
+                                "type": "string"
+                            },
+                            "active": {
+                                "type": "boolean"
+                            },
+                            "location": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "acknowledged": true,
+                                "modifiedCount": 1,
+                                "upsertedId": null,
+                                "upsertedCount": 0,
+                                "matchedCount": 1
                             }
                         }
                     }

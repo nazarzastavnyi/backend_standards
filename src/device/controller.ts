@@ -22,7 +22,7 @@ export class DeviceController {
 
     get = async (request: Request, response: Response, next: NextFunction) => {
         const device = await this.#service.get(request.params.id);
-        if(!device) {
+        if (!device) {
             return next(new Error());
         }
 
