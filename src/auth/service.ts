@@ -11,7 +11,6 @@ export class AuthService {
 
     async registerRider(rider: Rider) {
         const newRider = await riderModel.create(rider);
-
         return newRider;
     }
 
