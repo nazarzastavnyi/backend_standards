@@ -1,7 +1,6 @@
 name: Sonaqube
 on:
   - pull_request
-name: Sonarqube
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
