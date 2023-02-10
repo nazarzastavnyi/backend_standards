@@ -1,7 +1,7 @@
 name: Sonaqube
 on:
   - pull_request
-name: Sonarqube Workflow
+name: Sonarqube
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
