@@ -45,10 +45,12 @@ process
 
 mongoose.set('strictQuery', false);
 
-mongoose.connect(process.env.DB_URL)
+mongoose.connect(process.env.ENV === 'Test' ? process.env.TEST_DB_URL : process.env.DB_URL)
     .then(() => global.logger.info('Connected to DB'));
 
 const port = +process.env.PORT;
 app.listen(port, async () => {
     global.logger.info(`Standard-backend API started on port ${port}`);
 });
+
+export default app;
