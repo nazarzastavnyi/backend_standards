@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { AuthService } from './service';
 import { ResponseError } from '../shared/defs';
+import { prepareJsonResponse } from '../shared/route';
 
 export class AuthController {
     #authService: AuthService;
@@ -18,7 +19,7 @@ export class AuthController {
         
         const newRider = await this.#authService.registerRider(request.body);
 
-        response.json({ id: newRider._id });
+        prepareJsonResponse(response, { id: newRider._id });
     };
 
     login = async (request: Request, response: Response, next: NextFunction) => {
@@ -28,12 +29,12 @@ export class AuthController {
             return next(new ResponseError(401, 'Not auth'));
         }
 
-        response.json({ token });
+        prepareJsonResponse(response, { token });
     };
 
     logout = async (request: Request, response: Response) => {
         const logout = await this.#authService.logout(request.params.email);
 
-        response.json({success: logout});
+        prepareJsonResponse(response, {success: logout});
     };
 }

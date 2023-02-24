@@ -1,0 +1,23 @@
+version: "3"
+services:
+  nodejs-kubernetes:
+    image: gcr.io/backend-standard-378715/node-kubernetes:v0.0.4
+    environment:  
+      PORT: 80
+      DB_URL: mongodb://mongodb:27017/standard_server
+      SWAGGER: 'true'
+    ports:
+      - 80:80
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:4.2
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    volumes:
+      - mongodb-volume:/data/db
+    ports:
+      - 27017:27017
+volumes:
+  mongodb-volume:

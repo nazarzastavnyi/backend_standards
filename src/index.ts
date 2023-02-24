@@ -6,8 +6,11 @@ import { ResponseError } from './shared/defs';
 
 import authsRoutes from './auth/route';
 import devicesRoutes from './device/route';
+import { prepareJsonResponse } from './shared/route';
 
-const logger = new Logger();
+const logger = new Logger({
+    type: 'json'
+});
 global.logger = logger;
 
 const app = express();
@@ -31,7 +34,7 @@ if (process.env.SWAGGER === 'true') {
 
 app.use((err: ResponseError, req: Request, res: Response, next: NextFunction) => {
     global.logger.error(err.message);
-    res.status(err?.status || 500).json({error:  err.message || 'Internal error'});
+    prepareJsonResponse(res, {}, err);
     next();
 });
 
@@ -48,7 +51,7 @@ mongoose.set('strictQuery', false);
 mongoose.connect(process.env.DB_URL)
     .then(() => global.logger.info('Connected to DB'));
 
-const port = +process.env.PORT;
+const port = +process.env.PORT || 3000;
 app.listen(port, async () => {
     global.logger.info(`Standard-backend API started on port ${port}`);
 });

@@ -1,5 +1,6 @@
 import { DeviceService } from './service';
 import { NextFunction, Request, Response } from 'express';
+import { prepareJsonResponse } from '../shared/route';
 
 export class DeviceController {
     #service: DeviceService;
@@ -11,7 +12,7 @@ export class DeviceController {
     create = async (request: Request, response: Response) => {
         const device = await this.#service.create(request.body);
 
-        response.json(device);
+        prepareJsonResponse(response, device);
     };
 
     getList = async (request: Request, response: Response) => {
@@ -26,14 +27,14 @@ export class DeviceController {
             return next(new Error());
         }
 
-        response.json(device);
+        prepareJsonResponse(response, device);
     };
 
 
     update = async (request: Request, response: Response) => {
         const device = await this.#service.update(request.body);
 
-        response.json(device);
+        prepareJsonResponse(response, device);
 
     };
 
@@ -41,7 +42,7 @@ export class DeviceController {
         
         const result = await this.#service.delete(request.params.id);
 
-        response.json({success: result});
+        prepareJsonResponse(response, {success: result});
 
     };
 }
