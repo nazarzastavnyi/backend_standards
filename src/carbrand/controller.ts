@@ -1,5 +1,6 @@
 import {CarBrandService} from './service';
 import { NextFunction, Request, Response } from 'express';
+import { prepareJsonResponse } from '../shared/route';
 
 export class CarBrandController {
     #service: CarBrandService;
@@ -9,11 +10,11 @@ export class CarBrandController {
 
     create = async(request: Request, response: Response) => {
         const carBrand = await this.#service.create(request.body);
-        response.json(carBrand);
+        prepareJsonResponse(response,carBrand);
     };
     getList = async(request: Request, response: Response) => {
         const carBrands = await this.#service.getList();
-        response.json(carBrands);
+        prepareJsonResponse(response,carBrands);
     };
     get = async(request: Request, response: Response,next: NextFunction) => {
         const carBrand = await this.#service.get(request.params.id);
@@ -21,14 +22,14 @@ export class CarBrandController {
             return next(new Error());
         }
 
-        response.json(carBrand);
+        prepareJsonResponse(response,carBrand);
     };
     update = async(request: Request, response: Response) => {
         const carBrand = await this.#service.update(request.body);
-        response.json(carBrand);
+        prepareJsonResponse(response,carBrand);
     };
     delete = async(request: Request, response: Response) => {
         const result = await this.#service.delete(request.params.id);
-        response.json(result);
+        prepareJsonResponse(response,{success: result});
     };
 }

@@ -18,7 +18,7 @@ export class DeviceController {
     getList = async (request: Request, response: Response) => {
         const devices = await this.#service.getList();
 
-        response.json(devices);
+        prepareJsonResponse(response,devices);
     };
 
     get = async (request: Request, response: Response, next: NextFunction) => {
