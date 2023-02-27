@@ -438,6 +438,197 @@
                     }
                 }
             }
-        }
+        },
+        "/carBrand":{
+            "post":{
+                "tags":[
+                    "carBrand"
+                ],
+                "summary": "Create car brand",
+                "security":{
+                    "Bearer":[]
+                },
+                "parameters":[
+                    {
+                        "type":"object",
+                        "in":"body",
+                        "properties":{
+                            "brand": {
+                                "type": "string"
+                            },
+                            "model":{
+                                "type":"string"
+                            },
+                            "status":{
+                                "type":"boolean"
+                            },
+                            "countries":{
+                                "type": "array",
+                                "items":{
+                                    "type":"string"
+                                }                        
+                            }
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"OK",
+                        "examples":{
+                            "application/json":{
+                                "brand": "",
+                                "model": "",
+                                "status":true,
+                                "countries":[""],
+                                "_id": "63e4d776baa299d1ffde6ac1",
+                                "created_at": "2023-02-22T11:14:30.819Z",
+                                "last_used": "2023-02-22T11:14:30.819Z",
+                                "__v": 0
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "tags":[
+                    "carBrand"
+                ],
+                "summary": "Put car brand",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters":[{
+                    "type":"object",
+                    "in":"body",
+                    "properties":{
+                        "brand": {
+                            "type": "string"
+                        },
+                        "model":{
+                            "type":"string"
+                        },
+                        "status":{
+                            "type":"boolean"
+                        },
+                        "countries":{
+                            "type": "array",
+                            "items":{
+                                "type":"string"
+                            }                        
+                        }
+                    }
+                }],
+                "responses":{
+                    "200":{
+                        "description":"OK",
+                        "examples":{
+                            "application/json":{
+                                "acknowledged": true,
+                                "modifiedCount": 1,
+                                "upsertedId": null,
+                                "upsertedCount": 0,
+                                "matchedCount": 1
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/carBrand/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "carBrand"
+                ],
+                "summary": "Get car brand",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"OK",
+                        "examples":{
+                            "application/json":{
+                                "brand": "",
+                                "model": "",
+                                "status":true,
+                                "countries":["TM"],
+                                "_id": "63e4d776baa299d1ffde6ac1",
+                                "created_at": "2023-02-22T11:15:30.819Z",
+                                "last_used": "2023-02-22T11:15:30.819Z",
+                                "__v": 0
+                            }
+                        }
+                    }
+                }   
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "carBrand"
+                ],
+                "summary": "Delete car brand",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "success": {
+                                    "acknowledged": true,
+                                    "deletedCount": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/carBrandList":{
+            "get": {
+                "tags": [
+                    "carBrand"
+                ],
+                "summary": "Car brand list",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],"responses":{
+                    "200":{
+                        "description":"OK",
+                        "examples":{
+                            "application/json":[{
+                                "brand": "",
+                                "model": "",
+                                "status":true,
+                                "countries":[""],
+                                "_id": "63e4d776baa299d1ffde6ac1",
+                                "created_at": "2023-02-22T16:22:30.819Z",
+                                "last_used": "2023-02-22T16:22:30.819Z",
+                                "__v": 0
+                            }]
+                        }
+                    }
+                }
+            }    
+        }     
     }
 }

@@ -14,6 +14,12 @@ export namespace appRoute {
                 list: '/deviceList',
                 update: '/device/update',
                 deviceById: '/device/:id'
+            },
+            carBrand:{
+                carBrand: '/carBrand/',
+                list: '/carBrandList',
+                update: '/carBrand/update',
+                carBrandById: '/carBrand/:id'
             }
         };
     }

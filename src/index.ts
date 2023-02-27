@@ -6,6 +6,7 @@ import { ResponseError } from './shared/defs';
 
 import authsRoutes from './auth/route';
 import devicesRoutes from './device/route';
+import carBrandRoutes from './carbrand/route';
 import { prepareJsonResponse } from './shared/route';
 
 const logger = new Logger({
@@ -26,6 +27,7 @@ app.use(function (req, res, next) {
 
 app.use(authsRoutes);
 app.use(devicesRoutes);
+app.use(carBrandRoutes);
 
 if (process.env.SWAGGER === 'true') {
     const swaggerUi = require('swagger-ui-express');
