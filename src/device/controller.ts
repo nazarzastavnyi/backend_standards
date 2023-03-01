@@ -1,6 +1,7 @@
 import { DeviceService } from './service';
 import { NextFunction, Request, Response } from 'express';
 import { prepareJsonResponse } from '../shared/route';
+import { ResponseError } from '../shared/defs';
 
 export class DeviceController {
     #service: DeviceService;
@@ -24,23 +25,30 @@ export class DeviceController {
     get = async (request: Request, response: Response, next: NextFunction) => {
         const device = await this.#service.get(request.params.id);
         if (!device) {
-            return next(new Error());
+            return next(new ResponseError(404,'Device not found'));
         }
 
         prepareJsonResponse(response, device);
+
     };
 
 
-    update = async (request: Request, response: Response) => {
+    update = async (request: Request, response: Response, next: NextFunction) => {
         const device = await this.#service.update(request.body);
+        if (!device) {
+            return next(new ResponseError(404,'Device not found'));
+        }
 
         prepareJsonResponse(response, device);
 
     };
 
-    delete = async (request: Request, response: Response) => {
+    delete = async (request: Request, response: Response, next: NextFunction) => {
         
         const result = await this.#service.delete(request.params.id);
+        if (!result) {
+            return next(new ResponseError(404,'Device not found'));
+        }
 
         prepareJsonResponse(response, {success: result});
 

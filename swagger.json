@@ -380,6 +380,9 @@
                         "type": "object",
                         "in": "body",
                         "properties": {
+                            "_id":{
+                                "type":"string"
+                            },
                             "platform": {
                                 "type": "string"
                             },
@@ -506,6 +509,9 @@
                     "type":"object",
                     "in":"body",
                     "properties":{
+                        "_id":{
+                            "type":"string"
+                        },
                         "brand": {
                             "type": "string"
                         },
@@ -527,7 +533,8 @@
                     "200": {
                         "description": "OK",
                         "examples": {
-                            "application/json": {
+                            "application/json": 
+                            {
                                 "data": {
                                     "acknowledged": true,
                                     "modifiedCount": 1,
