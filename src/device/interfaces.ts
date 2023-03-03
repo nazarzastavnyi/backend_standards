@@ -1,7 +1,7 @@
 import { DeviceEnum } from './enums';
 
 export interface Device {
-    _id:string,
+    _id?:string,
     platform: DeviceEnum,
     device_id: string,
     fcm_token: string,
