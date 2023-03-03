@@ -24,7 +24,7 @@ describe('//device//',() => {
                 });
         });
     });
-    describe('POST //device',() => {
+    describe('POST /device',() => {
         it('Return new Device => status code 200',done => {
             chai
                 .request(app)

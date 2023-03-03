@@ -6,7 +6,9 @@ const newRider = {
 
 const loginRider = {
     password: 'testtest',
-    email: 'test@gmail.com'
+    email: 'test@gmail.com',
+    save:()=>{
+    }
 };
 
 export {
