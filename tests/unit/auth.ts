@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import riderModel from '../../src/auth/models';
 import { newRider,loginRider } from '../mocks/authMocks';
 import { expect } from 'chai';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 
 describe('Unit test for auth service logic', async() => {
     let authService: AuthService;

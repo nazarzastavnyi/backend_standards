@@ -7,7 +7,7 @@ const newRider = {
 const loginRider = {
     password: 'testtest',
     email: 'test@gmail.com',
-    save:()=>{
+    save:() => {
     }
 };
 
