@@ -13,7 +13,7 @@ const deviceController = new DeviceController();
 router.get(appRoute.getMap().device.deviceById, security.validateAuthenticatedRequest, deviceController.get);
 router.get(appRoute.getMap().device.list, security.validateAuthenticatedRequest, deviceController.getList);
 router.post(appRoute.getMap().device.device, security.validateAuthenticatedRequest, validator(deviceSchema), deviceController.create);
-router.put(appRoute.getMap().device.device, security.validateAuthenticatedRequest, validator(deviceSchema), deviceController.update);
+router.put(appRoute.getMap().device.update, security.validateAuthenticatedRequest, validator(deviceSchema), deviceController.update);
 router.delete(appRoute.getMap().device.deviceById, security.validateAuthenticatedRequest, deviceController.delete);
 
 export default router;

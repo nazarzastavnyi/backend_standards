@@ -15,10 +15,14 @@ export class CarBrandService {
     }
 
     async update(item:CarBrand) {
-        return carBrandModel.updateOne(item);
+        return carBrandModel.findByIdAndUpdate({_id:item._id},{
+            brand:item.brand,
+            model:item.model,
+            countries:item.countries,
+            status:item.status},{new: true});
     }
 
-    async delete(id:string) {
-        return carBrandModel.deleteOne({id});
+    async delete(_id:string) {
+        return carBrandModel.findByIdAndDelete({_id:_id});
     }
 }
